@@ -1,0 +1,199 @@
+FORMAT: 1A
+HOST: https://vuttr.airsky.com.br/v1
+
+
+# VUTTR
+(Very Useful Tools to Remember).
+
+Está é uma aplicação API Rest simples para gerenciar ferramentas com seus respectivos nomes, links, descrições e tags.
+
+A API retorna respostas em JSON body.
+
+
+## Rota: / [/]
+### Listar todas as Ferramentas [GET]
+
++ Response 200 (application/json)
+
+        [
+        {
+          "id": "f08b1066-a5a1-49fc-ad87-307967ccce53",
+          "title": "json-server",
+          "link": "https://github.com/typicode/json-server",
+          "description": "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.",
+          "tags": [
+            "json",
+            "schema",
+            "node",
+            "api",
+            "github",
+            "rest"
+          ]
+        },
+        {
+          "id": "1bbe751f-b21a-4569-82d2-68c46c56e399",
+          "title": "fastify",
+          "link": "https://www.fastify.io/",
+          "description": "Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.",
+          "tags": [
+            "node",
+            "web",
+            "localhost",
+            "https",
+            "framework",
+            "http2"
+          ]
+        },
+        {
+          "id": "09ac6e4b-5f60-48ac-8963-742980f91173",
+          "title": "Notion",
+          "link": "https://notion.so",
+          "description": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+          "tags": [
+            "organization"
+          ]
+        }
+        ]
+
+## Rota: /tools?tag=TagTitle [/tools?tag={tag}]
+
++ Parameters
+  + tag: node (string, required) - Tag
+
+### Listar todas as Ferramentas que contém uma tag [GET]
+
++ Response 200 (application/json)
+
+                  [
+                  {
+                    "id": "f08b1066-a5a1-49fc-ad87-307967ccce53",
+                    "title": "json-server",
+                    "link": "https://github.com/typicode/json-server",
+                    "description": "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.",
+                    "tags": [
+                      "json",
+                      "schema",
+                      "node",
+                      "api",
+                      "github",
+                      "rest"
+                    ]
+                  },
+                  {
+                    "id": "1bbe751f-b21a-4569-82d2-68c46c56e399",
+                    "title": "fastify",
+                    "link": "https://www.fastify.io/",
+                    "description": "Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.",
+                    "tags": [
+                      "node",
+                      "web",
+                      "localhost",
+                      "https",
+                      "framework",
+                      "http2"
+                    ]
+                  }
+                ]
+
+## Rota: /tools [/tools]
+### Criar uma ferramenta [POST]
+
++ Request (application/json)
+
+        {
+            "title": "Notion",
+            "link": "https://notion.so",
+            "description": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+            "tags": [
+              "organization",
+              "planning",
+              "collaboration",
+              "writing",
+              "calendar"
+              ]
+        }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+            "id": "1bbe751f-b21a-4569-82d2-68c46c56e399",
+            "title": "Notion",
+            "link": "https://notion.so",
+            "description": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+            "tags": [
+              "organization",
+              "planning",
+              "collaboration",
+              "writing",
+              "calendar"
+              ]
+            }
+
+## Rota: /tools/:id [/tools/{id_tool}]
+
++ Parameters
+  + id_tool: uuid (string, required) - ID Tool
+
+### Apagar uma ferramenta [DELETE]
++ Response 204
+
++ Response 404
+    + Body
+
+            {
+            "status": "error",
+            "message": "Tool not found"
+            }
+
+
+### Editar uma ferramenta [PUT]
+
++ Request (application/json)
+
+        {
+            "title": "Notion",
+            "link": "https://notion.so",
+            "description": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+            "tags": [
+              "organization",
+              "planning",
+              "collaboration",
+              "writing",
+              "calendar"
+              ]
+        }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+            "id": "1bbe751f-b21a-4569-82d2-68c46c56e399",
+            "title": "Notion",
+            "link": "https://notion.so",
+            "description": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+            "tags": [
+              "organization",
+              "planning",
+              "collaboration",
+              "writing",
+              "calendar"
+              ]
+            }
+
+# Data Structures
+
+## Tool (object)
++ title (string) - Título da Ferramenta
++ link (string) - Url da ferramenta
++ description (string) - Descrição da ferramenta
++ tags(array) - Tags da ferramenta
+
+## Tools (Tool)
++ id (string) - Id da ferramenta em Formato UUID
+
+## Created (Tool)
++ id (string) - Id da ferramenta em Formato UUID
+
+
+
